@@ -1,0 +1,26 @@
+# 환경변수
+.env
+.env.local
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Node
+node_modules/
+dist/
+.vite/
+
+# 업로드 파일
+backend/uploads/
+
+# 시스템
+.DS_Store
+Thumbs.db
+
+# MCP
+.mcp.json
+.claude/
