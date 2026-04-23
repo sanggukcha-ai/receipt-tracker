@@ -798,9 +798,9 @@ module.exports = {
 | 스타일링 | TailwindCSS | v3+ |
 | HTTP 클라이언트 | Axios | v1+ |
 | 백엔드 | Python FastAPI | v0.111+ |
-| LLM 오케스트레이션 | LangChain | v0.2+ |
+| LLM 오케스트레이션 | LangChain | v0.3+ |
 | OCR LLM | Upstage document-digitization-vision | - |
-| 이미지 처리 | Pillow / pdf2image | - |
+| 이미지 처리 | Pillow / pdf2image | Pillow v10.4+, pdf2image v1.17 |
 | 데이터 저장 | JSON 파일 | DB 미사용 |
 | 배포 | Vercel | - |
 | 버전 관리 | GitHub | main 브랜치 |
@@ -961,34 +961,41 @@ receipt-tracker/
 
 ---
 
-### Phase 1 — 프로젝트 환경 설정 (예상 0.5h)
+### Phase 1 — 프로젝트 환경 설정 ✅ 완료
 
 #### 작업 목록
 
-| # | 작업 | 산출물 | 우선도 |
-|---|------|--------|--------|
-| 1-1 | GitHub 레포지토리 생성 및 `.gitignore` 설정 | `receipt-tracker` 레포 | Must |
-| 1-2 | 프로젝트 디렉토리 구조 생성 | `backend/`, `frontend/` 폴더 | Must |
-| 1-3 | `.env` 파일 생성 및 `UPSTAGE_API_KEY` 등록 | `.env`, `.env.example` | Must |
-| 1-4 | Python 가상환경 생성 및 패키지 설치 | `venv/`, `requirements.txt` | Must |
+| # | 작업 | 산출물 | 우선도 | 상태 |
+|---|------|--------|--------|------|
+| 1-1 | GitHub 레포지토리 생성 및 `.gitignore` 설정 | `receipt-tracker` 레포 | Must | ✅ |
+| 1-2 | 프로젝트 디렉토리 구조 생성 | `backend/`, `frontend/` 폴더 | Must | ✅ |
+| 1-3 | `.env` 파일 생성 및 `UPSTAGE_API_KEY` 등록 | `.env`, `.env.example` | Must | ✅ |
+| 1-4 | Python 가상환경 생성 및 패키지 설치 | `backend/venv/`, `requirements.txt` | Must | ✅ |
 
-#### requirements.txt
+> **GitHub Repository**: https://github.com/sanggukcha-ai/receipt-tracker
+
+#### requirements.txt (실제 적용 버전)
 
 ```txt
 fastapi==0.111.0
 uvicorn[standard]==0.29.0
 python-multipart==0.0.9
-langchain==0.2.0
-langchain-upstage==0.1.0
-pillow==10.3.0
+langchain>=0.3.0
+langchain-upstage>=0.3.0
+pillow>=10.4.0
 pdf2image==1.17.0
 python-dotenv==1.0.1
 ```
 
+> **버전 변경 이유 (Python 3.13 호환성)**
+> - `langchain==0.2.0` → `>=0.3.0` : numpy 빌드 오류로 인해 업그레이드 필요
+> - `langchain-upstage==0.1.0` → `>=0.3.0` : langchain 버전에 맞춰 업그레이드
+> - `pillow==10.3.0` → `>=10.4.0` : Python 3.13 wheel 빌드 오류 해결
+
 #### 완료 기준
-- [ ] `uvicorn backend.main:app --reload` 실행 시 FastAPI 서버가 정상 기동된다
-- [ ] `http://localhost:8000/docs` Swagger UI가 열린다
-- [ ] `.env` 파일이 `.gitignore`에 포함되어 있다
+- [x] `uvicorn main:app --reload` 실행 시 FastAPI 서버가 정상 기동된다
+- [x] `http://localhost:8000/docs` Swagger UI가 열린다
+- [x] `.env` 파일이 `.gitignore`에 포함되어 있다
 
 ---
 
